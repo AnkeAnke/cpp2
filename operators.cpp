@@ -7,37 +7,38 @@ struct Handle // For A1
 	Handle(const Handle& other) : val(other.val) {}
 
 	// Assignment operator
-    Handle& operator= (const Handle& other) { val = other.val; return *this; }
-    // Normal function
-    Handle& copyFrom  (const Handle& other) { val = other.val; return *this; }
+	Handle& operator= (const Handle& other) { val = other.val; return *this; }
+	// Normal function
+	Handle& copyFrom  (const Handle& other) { val = other.val; return *this; }
 
-    int val;
+
+	int val;
 };
 
 
 struct Number // For A2 & 3
 {
-		// Constructs a new number when no further information is given. Hence, standard constructor.
-		Number() : val(0) {}
+	// Constructs a new number when no further information is given. Hence, standard constructor.
+	Number() : val(0) {}
 
-		// Constructs a number when we give it an int.
-		Number(int v) : val(v) {} 
+	// Constructs a number when we give it an int.
+	Number(int v) : val(v) {} 
 
-		// Constructs a number from another number by copying all data. Hence, copy constructor.
-		Number(const Number& other) : val(other.val) {}
+	// Constructs a number from another number by copying all data. Hence, copy constructor.
+	Number(const Number& other) : val(other.val) {}
 
-		// A glorified function that takes two Numbers (this and other) and adds them together.
-		// The result is a new Number that did not exist before, so we can not hand out a reference.
-		// Also, we need to leave this (hence this v const) and the other Number (hence const Number&) untouched. See line 90-91.
-		Number operator+ (const Number& other) const { return Number(val + other.val); }
+	// A glorified function that takes two Numbers (this and other) and adds them together.
+	// The result is a new Number that did not exist before, so we can not hand out a reference.
+	// Also, we need to leave this (hence this v const) and the other Number (hence const Number&) untouched. See line 90-91.
+	Number operator+ (const Number& other) const { return Number(val + other.val); }
 
-		// These two lines do actually change our object, so no const.
-		// Both variants are legal. See line 114-115..
-		void    operator+= (const Number& other) { somehowChange(other); }
-		Number& operator-= (const Number& other) { somehowChangeDifferently(other); return *this; }
+	// These two lines do actually change our object, so no const.
+	// Both variants are legal. See line 114-115..
+	void    operator+= (const Number& other) { somehowChange(other); }
+	Number& operator-= (const Number& other) { somehowChangeDifferently(other); return *this; }
 
-		int val;
-	};
+	int val;
+};
 
 int main()
 {
@@ -113,5 +114,4 @@ int main()
 	// You can omiss the return value. Then you can not chain operators. It is completely your choice whether you want to allow operator chaining!
 	c = a -= b; // Allowed, since operator-= returns a.
 	c = a += b; // Not allowed, since we return void for operator+=.
-
 }
